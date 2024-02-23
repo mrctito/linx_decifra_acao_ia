@@ -51,7 +51,6 @@ def decompoe_acao(usuario_input: UsuarioInput) -> str:
   # chama a API que traduz o comando do usuario em um código de menu
   result = llm.invoke({"texto": usuario_input, "tabela": tabela})
   return result["text"]
-
   
 if __name__ == "__main__":
 
