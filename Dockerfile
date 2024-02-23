@@ -61,7 +61,7 @@ RUN pip install --no-cache-dir -v \
 
 WORKDIR /app
 COPY . /app
-EXPOSE 8106
+EXPOSE 8107
 
 RUN pwd
 RUN which python3
