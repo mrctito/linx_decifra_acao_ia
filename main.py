@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 import uvicorn
-from llm import prepara_llm, prepara_llm_azure
+from llm import cria_chain
 from prompt import TABELA_COMANDOS_EMPORIO_STR, prepara_prompt
 
 app = FastAPI()
@@ -14,7 +14,7 @@ app = FastAPI()
 # rotina para testar o serviço
 def test():
   prompt = prepara_prompt()
-  llm = prepara_llm(prompt)
+  llm = cria_chain(prompt)
   while True:
       print("\n")
       texto_usuario = input("Digite o comando desejado: ")
@@ -34,12 +34,7 @@ class UsuarioInput(BaseModel):
 @app.post("/decompoe_acao/")
 def decompoe_acao(usuario_input: UsuarioInput) -> str:
   prompt = prepara_prompt()
-
-  # cria LLMChain nativo OpenAI ou Azure
-  if os.getenv("USE_AZURE", "N") == "S":
-    llm = prepara_llm_azure(prompt)
-  else:
-    llm = prepara_llm(prompt)
+  llm = cria_chain(prompt)
 
   # decide qual tabela de comandos usar
   tabela = ""
