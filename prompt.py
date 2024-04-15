@@ -1,11 +1,16 @@
-import os
 import json
-from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
+import os
+
 from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
 
-
-TABELA_COMANDOS_EMPORIO = [
+TABELA_COMANDOS_HUMANUS = [
+  {
+    "command": "calcula folha",
+    "description": "Calcula a folha de pagamento dos funcionários",
+    "code": "CFD1000001"
+  },
   {
     "command": "cadastrar novo produto",
     "description": "Adicionar um novo produto ao inventário",
@@ -62,8 +67,6 @@ TABELA_COMANDOS_EMPORIO = [
     "code": "CMD1000011"
   }
 ]
-
-TABELA_COMANDOS_EMPORIO_STR = json.dumps(TABELA_COMANDOS_EMPORIO)
 
 PROMPT_BASE = '''
 Você é um assistente inteligente que analisa comandos relacionados a operações comerciais.

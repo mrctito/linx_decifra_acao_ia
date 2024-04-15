@@ -1,13 +1,15 @@
-import os
 import json
-from fastapi import FastAPI
-from pydantic import BaseModel
-from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
+import os
+
 import uvicorn
+from fastapi import FastAPI
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel
+
 from llm import cria_chain
-from prompt import TABELA_COMANDOS_EMPORIO_STR, prepara_prompt
+from prompt import TABELA_COMANDOS_HUMANUS, prepara_prompt
 
 app = FastAPI()
 
@@ -37,11 +39,7 @@ def decompoe_acao(usuario_input: UsuarioInput) -> str:
   llm = cria_chain(prompt)
 
   # decide qual tabela de comandos usar
-  tabela = ""
-  if usuario_input.codigo_sistema == "EMPORIO":
-    tabela = TABELA_COMANDOS_EMPORIO_STR
-  else:
-    return "0"
+  tabela = TABELA_COMANDOS_HUMANUS
   
   # chama a API que traduz o comando do usuario em um código de menu
   result = llm.invoke({"texto": usuario_input, "tabela": tabela})
