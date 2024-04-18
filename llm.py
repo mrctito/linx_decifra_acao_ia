@@ -16,7 +16,6 @@ def cria_llm_azure(verbose: bool = False):
     AZURE_OPENAI_API_VERSION = os.getenv("AZURE_OPENAI_API_VERSION")
     AZURE_OPENAI_API_BASE = os.getenv("AZURE_OPENAI_API_BASE")
     AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
-    AZURE_OPENAI_API_TYPE = os.getenv("AZURE_OPENAI_API_TYPE")
 
     llm = AzureChatOpenAI(
         deployment_name=AZURE_DEPLOYMENT_NAME,
